@@ -106,8 +106,8 @@ const Form = ({onStateChange, authData}) => {
 
     const signIn = async (username, password) => {
         const user = await Auth.signIn(username, password)
-            .then(user => signInSuccess(user))
-            .catch(err => signInError(err));
+        .then(user => signInSuccess(user))
+        .catch(err => signInError(err));
     }
 
     const signInSuccess = (user) => {
@@ -119,7 +119,8 @@ const Form = ({onStateChange, authData}) => {
 
         // There are other sign in challenges we don't cover here.
         // SMS_MFA, SOFTWARE_TOKEN_MFA, NEW_PASSWORD_REQUIRED, MFA_SETUP ...
-        if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
+        if (user.challengeName === 'SMS_MFA' || user.challengeName
+            === 'SOFTWARE_TOKEN_MFA') {
             changeState('confirmSignIn', user);
 
         } else {
@@ -144,15 +145,15 @@ const Form = ({onStateChange, authData}) => {
 
     const checkContact = (user) => {
         Auth.verifiedContact(user)
-            .then(data => {
-                if (!JS.isEmpty(data.verified)) {
-                    changeState('signedIn', user);
+        .then(data => {
+            if (!JS.isEmpty(data.verified)) {
+                changeState('signedIn', user);
 
-                } else {
-                    user = Object.assign(user, data);
-                    changeState('verifyContact', user);
-                }
-            });
+            } else {
+                user = Object.assign(user, data);
+                changeState('verifyContact', user);
+            }
+        });
     }
 
     const hasError = field =>
@@ -161,7 +162,8 @@ const Form = ({onStateChange, authData}) => {
 
     return (
         <div className={classes.root}>
-            <form name="password-reset-form" method="post" onSubmit={handleSubmit}>
+            <form name="password-reset-form" method="post"
+                  onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
@@ -173,7 +175,8 @@ const Form = ({onStateChange, authData}) => {
                             size="medium"
                             name="username"
                             fullWidth
-                            helperText={hasError('username') ? formState.errors.username[0] : null}
+                            helperText={hasError('username')
+                                ? formState.errors.username[0] : null}
                             error={hasError('username')}
                             onChange={handleChange}
                             type="username"
@@ -190,7 +193,8 @@ const Form = ({onStateChange, authData}) => {
                             name="password"
                             fullWidth
                             helperText={
-                                hasError('password') ? formState.errors.password[0] : null
+                                hasError('password')
+                                    ? formState.errors.password[0] : null
                             }
                             error={hasError('password')}
                             onChange={handleChange}
@@ -207,9 +211,23 @@ const Form = ({onStateChange, authData}) => {
                     </Grid>
                     {hasAuthError &&
                     <Grid item xs={12}>
-                        <Alert severity="error">{formState.errors['auth']}</Alert>
+                        <Alert
+                            severity="error">{formState.errors['auth']}</Alert>
                     </Grid>
                     }
+                    <Grid item xs={12}>
+                        <Button
+                            size="large"
+                            variant="contained"
+                            type="button"
+                            color="primary"
+                            fullWidth
+                            onClick={() => Auth.federatedSignIn(
+                                {provider: 'Google'})}
+                        >
+                            Open Google
+                        </Button>
+                    </Grid>
                     <Grid item xs={12}>
                         <Button
                             size="large"
