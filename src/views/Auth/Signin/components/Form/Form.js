@@ -5,6 +5,8 @@ import validate from 'validate.js';
 import {LearnMoreLink} from 'components/atoms';
 import {Auth, JS, Logger} from 'aws-amplify';
 import MuiAlert from '@material-ui/lab/Alert';
+import GoogleIcon from '@material-ui/icons/Google';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 const logger = new Logger('Signin');
 
@@ -219,24 +221,39 @@ const Form = ({onStateChange, authData}) => {
                         <Button
                             size="large"
                             variant="contained"
-                            type="button"
+                            type="submit"
                             color="primary"
                             fullWidth
-                            onClick={() => Auth.federatedSignIn(
-                                {provider: 'Google'})}
                         >
-                            Open Google
+                            Send
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
                         <Button
                             size="large"
                             variant="contained"
-                            type="submit"
+                            type="button"
                             color="primary"
                             fullWidth
+                            startIcon={<GoogleIcon/>}
+                            onClick={() => Auth.federatedSignIn(
+                                {provider: 'Google'})}
                         >
-                            Send
+                            Signin with Google
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            size="large"
+                            variant="contained"
+                            type="button"
+                            color="primary"
+                            fullWidth
+                            startIcon={<FacebookIcon/>}
+                            onClick={() => Auth.federatedSignIn(
+                                {provider: 'Facebook'})}
+                        >
+                            Signin with Facebook
                         </Button>
                     </Grid>
                     <Grid item xs={12}>

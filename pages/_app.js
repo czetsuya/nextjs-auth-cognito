@@ -1,6 +1,6 @@
 /**
  * Caution: Consider this file when using NextJS
- * 
+ *
  * You may delete this file and its occurrences from the project filesystem if you are using GatsbyJS or react-scripts version
  */
 import React from 'react';
@@ -13,29 +13,28 @@ import 'assets/css/index.css';
 import 'swiper/swiper-bundle.css'
 import 'aos/dist/aos.css';
 
-import Amplify, { Auth } from 'aws-amplify';
-import { awsConfig } from '../src/aws-export';
-import { Logger } from 'aws-amplify';
+import Amplify from 'aws-amplify';
+import {awsConfig} from '../src/aws-export';
 
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
 Amplify.configure(awsConfig);
 
-export default function App({ Component, pageProps }) {
-  return (
-    <React.Fragment>
-      <Head>
-        <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-      </Head>
-      <Component {...pageProps} />
-    </React.Fragment>
-  );
+export default function App({Component, pageProps}) {
+    return (
+        <React.Fragment>
+            <Head>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+                />
+            </Head>
+            <Component {...pageProps} />
+        </React.Fragment>
+    );
 }
 
 App.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
+    Component: PropTypes.elementType.isRequired,
+    pageProps: PropTypes.object.isRequired,
 };
