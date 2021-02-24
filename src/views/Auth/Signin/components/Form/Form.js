@@ -5,8 +5,10 @@ import validate from 'validate.js';
 import {LearnMoreLink} from 'components/atoms';
 import {Auth, JS, Logger} from 'aws-amplify';
 import MuiAlert from '@material-ui/lab/Alert';
-import GoogleIcon from '@material-ui/icons/Google';
+import GoogleIcon from 'assets/icons/Google';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 
 const logger = new Logger('Signin');
 
@@ -121,15 +123,12 @@ const Form = ({onStateChange, authData}) => {
 
         // There are other sign in challenges we don't cover here.
         // SMS_MFA, SOFTWARE_TOKEN_MFA, NEW_PASSWORD_REQUIRED, MFA_SETUP ...
-        if (user.challengeName === 'SMS_MFA' || user.challengeName
-            === 'SOFTWARE_TOKEN_MFA') {
+        if (user.challengeName === 'SMS_MFA' || user.challengeName === 'SOFTWARE_TOKEN_MFA') {
             changeState('confirmSignIn', user);
 
         } else {
             checkContact(user);
         }
-
-        window.location.replace('/');
     }
 
     const signInError = (err) => {
@@ -229,32 +228,18 @@ const Form = ({onStateChange, authData}) => {
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button
-                            size="large"
-                            variant="contained"
-                            type="button"
-                            color="primary"
-                            fullWidth
-                            startIcon={<GoogleIcon/>}
-                            onClick={() => Auth.federatedSignIn(
-                                {provider: 'Google'})}
-                        >
-                            Signin with Google
-                        </Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                            size="large"
-                            variant="contained"
-                            type="button"
-                            color="primary"
-                            fullWidth
-                            startIcon={<FacebookIcon/>}
-                            onClick={() => Auth.federatedSignIn(
-                                {provider: 'Facebook'})}
-                        >
-                            Signin with Facebook
-                        </Button>
+                        <Box display="flex" flexDirection="row-reverse" p={0} m={0}>
+                            <IconButton aria-label="Google"
+                                        color="secondary"
+                                        onClick={() => Auth.federatedSignIn({provider: 'Google'})}>
+                                <GoogleIcon fontSize="large"/>
+                            </IconButton>
+                            <IconButton aria-label="Facebook"
+                                        color="secondary"
+                                        onClick={() => Auth.federatedSignIn({provider: 'Facebook'})}>
+                                <FacebookIcon fontSize="large"/>
+                            </IconButton>
+                        </Box>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography

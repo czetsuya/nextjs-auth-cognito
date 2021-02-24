@@ -1,19 +1,24 @@
 import React from 'react'
 import {Authenticator} from 'aws-amplify-react'
-import {ForgotPassword, Signin, Signup, SignupConfirm, ForgotPasswordReset} from './';
+import {Logger} from "aws-amplify";
+import {ForgotPassword, ForgotPasswordReset, Signin, Signup, SignupConfirm} from './';
+import {useRouter} from 'next/router'
 
-/*const AlwaysOn = ({onStateChange, authState}) => {
-    return (
-        <div>
-            <div>I am always here to show current auth state: {authState}</div>
-            <button onClick={() => onStateChange('signUp')}>Show Sign Up</button>
-        </div>
-    )
-}*/
+const logger = new Logger('Auth');
 
-const CustomAuthenticator = props => {
+const CustomAuthenticator = (router) => {
+
+    const handleAuthStateChange = (state) => {
+
+        logger.debug("Changing state to ", state)
+        if (state === 'signedIn') {
+            // window.location.replace('/');
+            router.push('/index')
+        }
+    }
+
     return (
-        <Authenticator hideDefault={true}>
+        <Authenticator hideDefault={true} onStateChange={handleAuthStateChange}>
             <Signin/>
             <Signup/>
             <SignupConfirm/>
@@ -23,11 +28,14 @@ const CustomAuthenticator = props => {
     )
 }
 
-const Auth = () => {
+const Auth = ({user}) => {
+
+    const router = useRouter()
 
     return (
         <React.Fragment>
-            <CustomAuthenticator/>
+            User={user}
+            <CustomAuthenticator router/>
         </React.Fragment>
     )
 }
