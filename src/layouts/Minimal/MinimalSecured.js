@@ -4,6 +4,9 @@ import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Divider} from '@material-ui/core';
 import {Topbar} from './components';
+import useAuthentication from "../../hooks/useAuthentication";
+import {ThemeProvider} from "@emotion/react";
+import CircularUnderLoad from "../../components/atoms/ProgressLoaders/CircularUnderLoad";
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -12,9 +15,15 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const Minimal = ({themeMode, children, className}) => {
+const MinimalSecured = ({themeMode, children, className, dispatch}) => {
+
+    const auth = useAuthentication({dispatch});
 
     const classes = useStyles();
+
+    if (auth.isLoading) {
+        return (<ThemeProvider><CircularUnderLoad/></ThemeProvider>)
+    }
 
     return (
         <div className={clsx(classes.root, className)}>
@@ -25,10 +34,10 @@ const Minimal = ({themeMode, children, className}) => {
     );
 };
 
-Minimal.propTypes = {
+MinimalSecured.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     themeMode: PropTypes.string.isRequired,
 };
 
-export default Minimal;
+export default MinimalSecured;

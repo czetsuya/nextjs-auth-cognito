@@ -12,15 +12,15 @@ import 'leaflet/dist/leaflet.css';
 import 'assets/css/index.css';
 import 'swiper/swiper-bundle.css'
 import 'aos/dist/aos.css';
-
-import Amplify from 'aws-amplify';
 import {awsConfig} from '../src/aws-export';
+import Amplify from 'aws-amplify';
 
 Amplify.Logger.LOG_LEVEL = 'DEBUG';
 
 Amplify.configure(awsConfig);
 
 export default function App({Component, pageProps}) {
+
     return (
         <React.Fragment>
             <Head>

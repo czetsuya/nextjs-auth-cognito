@@ -50,7 +50,7 @@ const Form = ({onStateChange, authData}) => {
 
     React.useEffect(() => {
         const errors = validate(formState.values, schema);
-
+        console.log(errors)
         setFormState(formState => ({
             ...formState,
             isValid: errors ? false : true,

@@ -6,15 +6,15 @@ import {useRouter} from 'next/router'
 
 const logger = new Logger('Auth');
 
-const CustomAuthenticator = (router) => {
+const CustomAuthenticator = ({router}) => {
 
     const handleAuthStateChange = (state) => {
 
-        logger.debug("Changing state to ", state)
-        if (state === 'signedIn') {
-            // window.location.replace('/');
-            router.push('/index')
-        }
+        // logger.debug("Changing state to ", state)
+        // if (state === 'signedIn') {
+        //     // window.location.replace('/');
+        //     router.push('/')
+        // }
     }
 
     return (
@@ -28,14 +28,13 @@ const CustomAuthenticator = (router) => {
     )
 }
 
-const Auth = ({user}) => {
+const Auth = () => {
 
     const router = useRouter()
 
     return (
         <React.Fragment>
-            User={user}
-            <CustomAuthenticator router/>
+            <CustomAuthenticator router={router}/>
         </React.Fragment>
     )
 }
