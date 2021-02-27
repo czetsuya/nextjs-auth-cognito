@@ -7,7 +7,7 @@ import getTheme from 'theme';
 import AOS from 'aos';
 
 export const useDarkMode = () => {
-    const [themeMode, setTheme] = useState('dark');
+    const [themeMode, setTheme] = useState('light');
     const [mountedComponent, setMountedComponent] = useState(false);
 
     const setMode = mode => {
@@ -51,7 +51,9 @@ export default function WithLayout({component: Component, layout: Layout, ...res
 
     const [themeMode, themeToggler, mountedComponent] = useDarkMode();
 
-    if (!mountedComponent) return <div/>;
+    if (!mountedComponent) {
+        return <div/>;
+    }
 
     return (
         <ThemeProvider theme={getTheme(themeMode)}>
