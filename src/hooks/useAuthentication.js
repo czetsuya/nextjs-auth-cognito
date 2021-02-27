@@ -70,7 +70,7 @@ const useAuthentication = ({dispatch}) => {
                     logger.debug('the Auth module is configured');
                     break;
                 case 'signIn':
-                    logger.debug('user signed in');
+                    logger.debug('user signed in ', user);
                     break;
                 case 'signIn_failure':
                     logger.debug('user signin ko');

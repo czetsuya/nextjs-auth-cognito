@@ -1,13 +1,14 @@
-import React from 'react'
-import {useAuthContext} from "../../contexts/AuthContext";
-import styles from "../Home/Home.module.css";
-import Head from "next/head";
-import {Button} from "@material-ui/core";
-import Link from "next/link";
+import Head from 'next/head'
+import styles from './Home.module.css'
+import {Logger} from 'aws-amplify'
+import Link from 'next/link';
+import useAuthentication from "../../hooks/useAuthentication";
 
-const Secured = () => {
+const logger = new Logger('SignOut');
 
-    const {auth} = useAuthContext();
+const Home = ({dispatch}) => {
+
+    const auth = useAuthentication({dispatch})
 
     return (
         <div className={styles.container}>
@@ -28,10 +29,7 @@ const Secured = () => {
                 <div className={styles.grid}>
                     <div className={styles.card}>
                         <h3>Authentication &rarr;</h3>
-                        {auth.isAuthenticated &&
 
-                        <Button onClick={auth.signOut}>Signout</Button>
-                        }
                         {!auth.isAuthenticated &&
                         <Link href="/signin">
                             <a>Sign in to Amazon Cognito</a>
@@ -54,4 +52,4 @@ const Secured = () => {
     )
 }
 
-export default Secured
+export default Home;

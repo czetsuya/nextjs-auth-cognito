@@ -7,6 +7,7 @@ import {Topbar} from './components';
 import useAuthentication from "../../hooks/useAuthentication";
 import {ThemeProvider} from "@emotion/react";
 import CircularUnderLoad from "../../components/atoms/ProgressLoaders/CircularUnderLoad";
+import {AuthProvider} from "../../contexts/AuthContext"
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -22,15 +23,17 @@ const MinimalSecured = ({themeMode, children, className, dispatch}) => {
     const classes = useStyles();
 
     if (auth.isLoading) {
-        return (<ThemeProvider><CircularUnderLoad/></ThemeProvider>)
+        return (<><CircularUnderLoad/></>)
     }
 
     return (
-        <div className={clsx(classes.root, className)}>
-            <Topbar themeMode={themeMode}/>
-            <Divider/>
-            <main className={classes.content}>{children}</main>
-        </div>
+        <AuthProvider value={{auth}}>
+            <div className={clsx(classes.root, className)}>
+                <Topbar themeMode={themeMode}/>
+                <Divider/>
+                <main className={classes.content}>{children}</main>
+            </div>
+        </AuthProvider>
     );
 };
 

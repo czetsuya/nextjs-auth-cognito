@@ -10,11 +10,10 @@ const CustomAuthenticator = ({router}) => {
 
     const handleAuthStateChange = (state) => {
 
-        // logger.debug("Changing state to ", state)
-        // if (state === 'signedIn') {
-        //     // window.location.replace('/');
-        //     router.push('/')
-        // }
+        logger.debug("Changing state to ", state)
+        if (state === 'signedIn') {
+            router.push('/secured')
+        }
     }
 
     return (
