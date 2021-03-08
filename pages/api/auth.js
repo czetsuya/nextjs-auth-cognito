@@ -1,13 +1,21 @@
-import Cookies from 'cookies'
+import {Auth} from 'aws-amplify';
 
-export default (req, res) => {
+export default async (req, res) => {
 
-    console.log('req ', req.headers)
+    const result = await Auth.currentSession().then(response => {
+        let accessToken = response.getAccessToken();
+        let jwt = accessToken.getJwtToken();
 
-    const cookies = new Cookies(req, res)
-    // Get a cookie
-    const username = cookies.get('CognitoIdentityServiceProvider.5m4mjt98q2348f34gvpk90bhsc.Google_104543028830140686248.userData')
+        //You can print them to see the full objects
+        console.log(`myAccessToken: ${JSON.stringify(accessToken)}`);
+        console.log(`myJwt: ${jwt}`);
 
-    res.statusCode = 200
-    res.json({name: username})
+        res.statusCode = 200;
+        res.json({'token': jwt});
+
+    }).catch(e => {
+        console.log(e);
+        res.statusCode = 200;
+        res.json({name: e});
+    })
 }

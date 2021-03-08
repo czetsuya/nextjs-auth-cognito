@@ -12,7 +12,7 @@ const Secured = () => {
 
     const {auth} = useAuthContext()
     const {user} = auth;
-    const providerInfo = JSON.parse(user.attributes.identities)
+    const providerInfo = user.attributes && user.attributes.identities ? JSON.parse(user.attributes.identities) : null;
 
     return (
         <div className={styles.container}>
@@ -37,8 +37,12 @@ const Secured = () => {
                         <div>Email: {user.attributes.email}</div>
                         <div>Given name: {user.attributes.given_name}</div>
                         <div>Family name: {user.attributes.family_name}</div>
-                        <div>Provider name: {providerInfo[0].providerName}</div>
-                        <div>User Id: {providerInfo[0].userId}</div>
+                        {providerInfo &&
+                        <div>
+                            <div>Provider name: {providerInfo[0].providerName}</div>
+                            <div>User Id: {providerInfo[0].userId}</div>
+                        </div>
+                        }
                     </div>
                     <div className={styles.card}>
                         <h3>Authentication &rarr;</h3>
