@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import styles from './Home.module.css'
 import {Logger} from 'aws-amplify'
-import Link from 'next/link';
-import useAuthentication from "../../hooks/useAuthentication";
+import Link from 'next/link'
+import {useAuthContext} from '../../contexts/AuthContext'
 
-const logger = new Logger('SignOut');
+const logger = new Logger('Home');
 
-const Home = ({dispatch}) => {
+const Home = () => {
 
-    const auth = useAuthentication({dispatch})
+    const {auth} = useAuthContext()
+    logger.debug("home auth ", auth)
 
     return (
         <div className={styles.container}>
@@ -30,9 +31,15 @@ const Home = ({dispatch}) => {
                     <div className={styles.card}>
                         <h3>Authentication &rarr;</h3>
 
-                        {!auth.isAuthenticated &&
-                        <Link href="/signin">
+                        {!auth.isLoading && !auth.isAuthenticated &&
+                        <Link component="button"
+                              href="/signin">
                             <a>Sign in to Amazon Cognito</a>
+                        </Link>
+                        }
+                        {!auth.isLoading && auth.isAuthenticated &&
+                        <Link component="button" href="#">
+                            <a onClick={auth.signOut}>Signout</a>
                         </Link>
                         }
                     </div>

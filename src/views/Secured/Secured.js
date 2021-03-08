@@ -1,13 +1,18 @@
 import React from 'react'
-import {useAuthContext} from "../../contexts/AuthContext";
 import styles from "../Home/Home.module.css";
 import Head from "next/head";
 import {Button} from "@material-ui/core";
 import Link from "next/link";
+import {Logger} from "aws-amplify";
+import {useAuthContext} from "../../contexts/AuthContext";
+
+const logger = new Logger('Secured');
 
 const Secured = () => {
 
-    const {auth} = useAuthContext();
+    const {auth} = useAuthContext()
+    const {user} = auth;
+    const providerInfo = JSON.parse(user.attributes.identities)
 
     return (
         <div className={styles.container}>
@@ -26,6 +31,15 @@ const Secured = () => {
                 </p>
 
                 <div className={styles.grid}>
+                    <div className={styles.card}>
+                        <h3>User Info</h3>
+                        <div>Username: {user.username}</div>
+                        <div>Email: {user.attributes.email}</div>
+                        <div>Given name: {user.attributes.given_name}</div>
+                        <div>Family name: {user.attributes.family_name}</div>
+                        <div>Provider name: {providerInfo[0].providerName}</div>
+                        <div>User Id: {providerInfo[0].userId}</div>
+                    </div>
                     <div className={styles.card}>
                         <h3>Authentication &rarr;</h3>
                         {auth.isAuthenticated &&

@@ -4,10 +4,11 @@ import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
 import {Divider} from '@material-ui/core';
 import {Topbar} from './components';
-import useAuthentication from "../../hooks/useAuthentication";
-import {ThemeProvider} from "@emotion/react";
 import CircularUnderLoad from "../../components/atoms/ProgressLoaders/CircularUnderLoad";
-import {AuthProvider} from "../../contexts/AuthContext"
+import {useAuthContext} from "../../contexts/AuthContext"
+import {Logger} from "aws-amplify";
+
+const logger = new Logger('MinimalSecured');
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -18,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const MinimalSecured = ({themeMode, children, className, dispatch}) => {
 
-    const auth = useAuthentication({dispatch});
+    const {auth} = useAuthContext()
 
     const classes = useStyles();
 
@@ -27,13 +28,11 @@ const MinimalSecured = ({themeMode, children, className, dispatch}) => {
     }
 
     return (
-        <AuthProvider value={{auth}}>
-            <div className={clsx(classes.root, className)}>
-                <Topbar themeMode={themeMode}/>
-                <Divider/>
-                <main className={classes.content}>{children}</main>
-            </div>
-        </AuthProvider>
+        <div className={clsx(classes.root, className)}>
+            <Topbar themeMode={themeMode}/>
+            <Divider/>
+            <main className={classes.content}>{children}</main>
+        </div>
     );
 };
 

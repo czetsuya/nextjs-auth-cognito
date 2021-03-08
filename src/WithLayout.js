@@ -5,6 +5,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import getTheme from 'theme';
 
 import AOS from 'aos';
+import {AuthProvider} from "./contexts/AuthContext";
+import useAuthentication from "./hooks/useAuthentication";
+import CircularUnderLoad from "./components/atoms/ProgressLoaders/CircularUnderLoad";
+import {useDispatch} from "react-redux";
 
 export const useDarkMode = () => {
     const [themeMode, setTheme] = useState('light');
@@ -33,7 +37,11 @@ export const useDarkMode = () => {
     return [themeMode, themeToggler, mountedComponent];
 };
 
-export default function WithLayout({component: Component, layout: Layout, ...rest}) {
+export default function WithLayout({component: Component, layout: Layout, isSecured = false, ...rest}) {
+
+    const dispatch = useDispatch()
+    const auth = useAuthentication({dispatch})
+
     React.useEffect(() => {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
@@ -55,15 +63,21 @@ export default function WithLayout({component: Component, layout: Layout, ...res
         return <div/>;
     }
 
+    if (isSecured && auth.isLoading) {
+        return <CircularUnderLoad></CircularUnderLoad>
+    }
+
     return (
         <ThemeProvider theme={getTheme(themeMode)}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline/>
-            <Paper elevation={0}>
-                <Layout themeMode={themeMode} themeToggler={themeToggler}>
-                    <Component themeMode={themeMode} {...rest} />
-                </Layout>
-            </Paper>
+            <AuthProvider value={{auth}}>
+                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                <CssBaseline/>
+                <Paper elevation={0}>
+                    <Layout themeMode={themeMode} themeToggler={themeToggler}>
+                        <Component themeMode={themeMode} {...rest} />
+                    </Layout>
+                </Paper>
+            </AuthProvider>
         </ThemeProvider>
     );
 }

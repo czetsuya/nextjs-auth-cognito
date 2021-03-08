@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react'
 
 import {Auth, Hub, Logger} from 'aws-amplify'
+import * as AuthorizationActions from '../redux/modules/Authorization'
 
 const logger = new Logger('useAuthentication');
 
@@ -36,10 +37,17 @@ const useAuthentication = ({dispatch}) => {
 
         Auth.currentAuthenticatedUser()
         .then(user => {
-            logger.debug("Currently logged user ", user)
             setUser(user)
             setIsAuthenticated(_isAuthenticated(user))
             setError(null)
+            setIsLoading(false)
+            dispatch(AuthorizationActions.updateToken({
+                token: user.signInUserSession.accessToken.jwtToken,
+                externalReferenceId: user.username,
+                email: user.attributes.email,
+                firstName: user.attributes.given_name,
+                lastName: user.attributes.family_name
+            }))
         })
         .catch(err => {
             logger.error("Error authenticating user", err)
@@ -50,9 +58,10 @@ const useAuthentication = ({dispatch}) => {
             } else {
                 setError(err)
             }
+            setIsLoading(false)
+            dispatch(AuthorizationActions.logout())
         })
 
-        setIsLoading(false)
     }, [dispatch])
 
     // Make sure our state is loaded before first render

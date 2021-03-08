@@ -9,6 +9,8 @@ import GoogleIcon from 'assets/icons/Google';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
+import useAuthentication from "../../../../../hooks/useAuthentication";
+import {useDispatch} from "react-redux";
 
 const logger = new Logger('Signin');
 
@@ -50,7 +52,6 @@ const Form = ({onStateChange, authData}) => {
 
     React.useEffect(() => {
         const errors = validate(formState.values, schema);
-        console.log(errors)
         setFormState(formState => ({
             ...formState,
             isValid: errors ? false : true,

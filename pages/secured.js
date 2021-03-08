@@ -7,6 +7,7 @@ const SecuredPage = () => {
 
     return (
         <WithLayout
+            isSecured={true}
             component={Secured}
             layout={MinimalSecured}
         />
