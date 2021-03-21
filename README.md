@@ -1,3 +1,5 @@
+*If you would like to support these tutorials, you can contribute to my [Patreon account](https://patreon.com/czetsuya)
+
 # NextJS Authentication with Amazon Cognito
 
 This project is built on top of NextJS and is integrated with Amazon Cognito to provide Auth functionality such as signup, signin, and password reset.
@@ -8,25 +10,29 @@ For the Authentication features to work, you must have an AWS account to use the
 
 Create a Cognito User pool, App client, and setup the domain.
 
-Finally, open the filw src/aws-export.js and update the values being asked.
+Finally, open the file .env and update the values being asked.
 
 ## Getting Started
 
-First, run the development server:
+Install the dependencies:
 
 ```bash
-npm run dev
-# or
+yarn install
+```
+
+Create the pems.json file required by the API code.
+
+```bash
+yarn prepare-pems --region <AWS_REGION> --userPoolId <AWS_USER_POOL_ID>
+```
+
+Run the development server:
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000/signin) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser and navigate to the signin page.
+Note that you must have already added test emails in Google for testing.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+After successfully signing in, the API can be access at: http://localhost:3000/api/authtest

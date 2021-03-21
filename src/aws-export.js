@@ -4,20 +4,20 @@ Amplify.configure({
     Auth: {
 
         // REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
-        // identityPoolId: 'xxx',
+        // identityPoolId: 'us-east-2:51685aa4-1c4d-485e-b88b-d53b48dc2443',
 
         // REQUIRED - Amazon Cognito Region
-        region: 'xxx',
+        region: process.env.NEXT_PUBLIC_AWS_COGNITO_REGION,
 
         // OPTIONAL - Amazon Cognito Federated Identity Pool Region
         // Required only if it's different from Amazon Cognito Region
         // identityPoolRegion: 'XX-XXXX-X',
 
         // OPTIONAL - Amazon Cognito User Pool ID
-        userPoolId: 'xxx',
+        userPoolId: process.env.NEXT_PUBLIC_AWS_COGNITO_POOL_ID,
 
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: 'xxx',
+        userPoolWebClientId: process.env.NEXT_PUBLIC_AWS_COGNITO_WEB_CLIENT_ID,
 
         // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
         mandatorySignIn: true,
@@ -45,14 +45,14 @@ Amplify.configure({
         authenticationFlowType: 'USER_PASSWORD_AUTH',
 
         // OPTIONAL - Manually set key value pairs that can be passed to Cognito Lambda Triggers
-        clientMetadata: { project: 'xxx' },
+        clientMetadata: { project: 'sparqr' },
 
         // OPTIONAL - Hosted UI configuration
         oauth: {
-            domain: 'xxx',
-            scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
-            redirectSignIn: 'http://localhost:3000',
-            redirectSignOut: 'http://localhost:3000',
+            domain: process.env.NEXT_PUBLIC_AWS_COGNITO_OAUTH_DOMAIN,
+            scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+            redirectSignIn: process.env.NEXT_PUBLIC_AWS_COGNITO_REDIRECT_SIGNIN,
+            redirectSignOut: process.env.NEXT_PUBLIC_AWS_COGNITO_REDIRECT_SIGNOUT,
             responseType: 'code' // or 'token', note that REFRESH token will only be generated when the responseType is code
         }
     }
