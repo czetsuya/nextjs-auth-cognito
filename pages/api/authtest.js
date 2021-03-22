@@ -4,7 +4,7 @@ export default async (req, res) => {
 
   const initialAuth = getServerSideAuth(req)
 
-  console.log("initialAuth ", initialAuth)
+  console.log("accessToken=", initialAuth.accessToken)
 
   if (initialAuth) {
     res.status(200).json({status: 'success'})
