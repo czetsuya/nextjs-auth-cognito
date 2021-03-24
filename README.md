@@ -12,18 +12,16 @@ Create a Cognito User pool, App client, and setup the domain.
 
 Finally, open the file .env and update the values being asked.
 
+Note: We are using [SSR Support for AWS Amplify JavaScript Libraries](https://aws.amazon.com/de/blogs/mobile/ssr-support-for-aws-amplify-javascript-libraries/)  
+To get the token in the API. This can be 
+useful when we want our NextJS API to act as a gateway and forward the request to an external API with the bearer token.
+
 ## Getting Started
 
 Install the dependencies:
 
 ```bash
 yarn install
-```
-
-Create the pems.json file required by the API code.
-
-```bash
-yarn prepare-pems --region <AWS_REGION> --userPoolId <AWS_USER_POOL_ID>
 ```
 
 Run the development server:

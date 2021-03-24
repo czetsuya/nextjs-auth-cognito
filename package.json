@@ -19,7 +19,6 @@
     "aos": "^2.3.4",
     "aws-amplify": "^3.3.25",
     "aws-amplify-react": "^4.2.29",
-    "aws-cognito-next": "^3.0.1",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",
     "jarallax": "^1.12.5",
