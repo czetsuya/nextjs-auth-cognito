@@ -34,3 +34,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser and naviga
 Note that you must have already added test emails in Google for testing.
 
 After successfully signing in, the API can be access at: http://localhost:3000/api/authtest
+
+## Definition of Terms
+
+ - authData - https://docs.amplify.aws/ui/auth/authenticator/q/framework/react-native#show-your-app-after-sign-in
+ - authState - https://docs.amplify.aws/ui/auth/authenticator/q/framework/react#authstate
+ - onStateChange - https://docs.amplify.aws/ui/auth/authenticator/q/framework/react-native#customize-your-own-components
+
+## References
+
+- https://docs.amplify.aws/lib/auth/customui/q/platform/js
