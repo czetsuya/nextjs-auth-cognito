@@ -35,7 +35,7 @@ const Topbar = ({ themeMode, className, ...rest }) => {
   return (
     <Toolbar className={clsx(classes.toolbar, className)} {...rest}>
       <div className={classes.logoContainer}>
-        <a href="/" title="thefront">
+        <a href="/" title="Czetsuya Tech">
           <Image
             className={classes.logoImage}
             src={'assets/logo.svg'}
