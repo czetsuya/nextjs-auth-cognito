@@ -1,8 +1,6 @@
 import React, {useCallback, useEffect, useLayoutEffect, useState} from 'react'
 
 import {Auth, Hub, Logger} from 'aws-amplify'
-import * as AuthorizationActions from '../redux/modules/Authorization'
-
 const logger = new Logger('useAuthentication');
 
 /**
@@ -26,7 +24,7 @@ const logger = new Logger('useAuthentication');
  * @see https://medium.com/@georgemccreadie/introduction-to-using-aws-cognito-hosted-ui-with-amplify-js-4711cf4f925a
  */
 
-const useAuthentication = ({dispatch}) => {
+const useAuthentication = ({}) => {
     const [user, setUser] = useState(null) // cognito user
     const [isAuthenticated, setIsAuthenticated] = useState(!!user)
     const [error, setError] = useState(false)
@@ -41,13 +39,6 @@ const useAuthentication = ({dispatch}) => {
             setIsAuthenticated(_isAuthenticated(user))
             setError(null)
             setIsLoading(false)
-            dispatch(AuthorizationActions.updateToken({
-                token: user.signInUserSession.accessToken.jwtToken,
-                externalReferenceId: user.username,
-                email: user.attributes.email,
-                firstName: user.attributes.given_name,
-                lastName: user.attributes.family_name
-            }))
         })
         .catch(err => {
             logger.error("Error authenticating user", err)
@@ -59,10 +50,9 @@ const useAuthentication = ({dispatch}) => {
                 setError(err)
             }
             setIsLoading(false)
-            dispatch(AuthorizationActions.logout())
         })
 
-    }, [dispatch])
+    }, [])
 
     // Make sure our state is loaded before first render
     useLayoutEffect(() => {

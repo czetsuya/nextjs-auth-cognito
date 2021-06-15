@@ -37,6 +37,7 @@ After successfully signing in, the API can be access at: http://localhost:3000/a
 
 ## Definition of Terms
 
+ - Customize UI components - https://docs.amplify.aws/lib/auth/customui/q/platform/js#custom_auth-flow
  - authData - https://docs.amplify.aws/ui/auth/authenticator/q/framework/react-native#show-your-app-after-sign-in
  - authState - https://docs.amplify.aws/ui/auth/authenticator/q/framework/react#authstate
  - onStateChange - https://docs.amplify.aws/ui/auth/authenticator/q/framework/react-native#customize-your-own-components

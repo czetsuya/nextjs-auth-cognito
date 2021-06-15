@@ -1,1 +1,1 @@
-export { default } from './SigninConfirm';
+export {default} from './SigninConfirm';

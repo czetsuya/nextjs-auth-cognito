@@ -8,7 +8,6 @@ import AOS from 'aos';
 import {AuthProvider} from "./contexts/AuthContext";
 import useAuthentication from "./hooks/useAuthentication";
 import CircularUnderLoad from "./components/atoms/ProgressLoaders/CircularUnderLoad";
-import {useDispatch} from "react-redux";
 
 export const useDarkMode = () => {
     const [themeMode, setTheme] = useState('light');
@@ -39,8 +38,7 @@ export const useDarkMode = () => {
 
 export default function WithLayout({component: Component, layout: Layout, isSecured = false, ...rest}) {
 
-    const dispatch = useDispatch()
-    const auth = useAuthentication({dispatch})
+    const auth = useAuthentication({})
 
     React.useEffect(() => {
         // Remove the server-side injected CSS.
