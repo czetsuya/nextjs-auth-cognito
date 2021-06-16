@@ -4,22 +4,22 @@ import Head from "next/head";
 import {Button} from "@material-ui/core";
 import Link from "next/link";
 import {Auth, Logger} from "aws-amplify";
-import {useAuthContext} from "../../contexts/AuthContext";
 import * as StringUtils from "../../utils/StringUtils";
 import {Adsense} from '../../components/atoms'
+import {useSessionContext} from "../../store/SessionContext";
 
 const logger = new Logger('Secured');
 
 const Secured = () => {
 
-  const {auth} = useAuthContext()
-  const {user} = auth;
+  const session = useSessionContext()
+  const {user} = session;
   const providerInfo = JSON.parse(user.attributes.identities)
   const [token, setToken] = useState()
   const username = StringUtils.replaceLastN(user.username, 16)
-  const userId = StringUtils.replaceLastN(providerInfo[0].userId, 16)
+  const userId = StringUtils.replaceFirstMAndLastN(providerInfo[0].userId, 8, 8)
 
-  Auth.currentSession().then(data => setToken(data.accessToken.jwtToken));
+  Auth.currentSession().then(data => setToken(StringUtils.replaceFirstMAndLastN(data.accessToken.jwtToken, 10, 10)));
 
   return (
       <div className={styles.container}>
@@ -52,11 +52,10 @@ const Secured = () => {
             </div>
             <div className={styles.card}>
               <h3>Authentication &rarr;</h3>
-              {auth.isAuthenticated &&
-
-              <Button onClick={auth.signOut}>Signout</Button>
+              {session.isAuthenticated &&
+              <Button onClick={session.signOut}>Signout</Button>
               }
-              {!auth.isAuthenticated &&
+              {!session.isAuthenticated &&
               <Link href="/signin">
                 <a>Sign in to Amazon Cognito</a>
               </Link>

@@ -1,16 +1,15 @@
 import React from 'react';
-import Minimal from 'layouts/Minimal';
-import WithLayout from 'WithLayout';
-import {Auth} from 'views/Auth';
+import {Minimal, WithLayout} from "layouts";
+import {AuthComponent} from 'views/Auth';
 
 const SigninPage = () => {
 
-    return (
-        <WithLayout
-            component={Auth}
-            layout={Minimal}
-        />
-    )
+  return (
+      <WithLayout
+          component={AuthComponent}
+          layout={Minimal}
+      />
+  )
 }
 
 export default SigninPage

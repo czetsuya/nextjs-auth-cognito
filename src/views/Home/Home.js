@@ -2,16 +2,16 @@ import Head from 'next/head'
 import styles from './Home.module.css'
 import {Logger} from 'aws-amplify'
 import Link from 'next/link'
-import {useAuthContext} from '../../contexts/AuthContext'
 import {Adsense} from "../../components/atoms";
 import React from "react";
+import {useSessionContext} from "../../store/SessionContext";
 
 const logger = new Logger('Home');
 
 const Home = () => {
 
-  const {auth} = useAuthContext()
-  logger.debug("home auth ", auth)
+  const session = useSessionContext()
+  logger.debug("home auth ", session)
 
   return (
       <div className={styles.container}>
@@ -33,15 +33,15 @@ const Home = () => {
             <div className={styles.card}>
               <h3>Authentication &rarr;</h3>
 
-              {!auth.isLoading && !auth.isAuthenticated &&
+              {!session.isLoading && !session.isAuthenticated &&
               <Link component="button"
                     href="/signin">
                 <a>Sign in to Amazon Cognito</a>
               </Link>
               }
-              {!auth.isLoading && auth.isAuthenticated &&
+              {!session.isLoading && session.isAuthenticated &&
               <Link component="button" href="#">
-                <a onClick={auth.signOut}>Signout</a>
+                <a onClick={session.signOut}>Signout</a>
               </Link>
               }
             </div>

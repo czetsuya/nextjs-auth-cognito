@@ -33,7 +33,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-src/aws-export.js
+src/config/aws-export.js
 /yarn.lock
 /pems.json
 /package-lock.json

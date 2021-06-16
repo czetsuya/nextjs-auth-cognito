@@ -1,5 +1,5 @@
 import Amplify, {Logger, withSSRContext} from "aws-amplify";
-import {awsConfig} from '../../src/aws-export'
+import {awsConfig} from '../../src/config/aws-export'
 
 Amplify.configure({...awsConfig, ssr: true})
 

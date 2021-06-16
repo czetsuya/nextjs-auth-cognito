@@ -2,7 +2,7 @@
 
 # NextJS Authentication with Amazon Cognito
 
-This project is built on top of NextJS and is integrated with Amazon Cognito to provide Auth functionality such as signup, signin, and password reset.
+This project is built on top of NextJS and is integrated with Amazon Cognito to provide AuthComponent functionality such as signup, signin, and password reset.
 
 ## Amazon Cognito
 

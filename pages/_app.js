@@ -12,7 +12,7 @@ import 'leaflet/dist/leaflet.css';
 import 'assets/css/index.css';
 import 'swiper/swiper-bundle.css'
 import 'aos/dist/aos.css';
-import {awsConfig} from '../src/aws-export';
+import {awsConfig} from '../src/config/aws-export';
 import Amplify from 'aws-amplify';
 
 Amplify.Logger.LOG_LEVEL = 'DEBUG';

@@ -6,7 +6,7 @@
 import React from 'react';
 import NotFoundCover from 'views/NotFoundCover';
 import Minimal from 'layouts/Minimal';
-import WithLayout from 'WithLayout';
+import {WithLayout} from "layouts";
 
 const FourOFourPage = () => {
   return (

@@ -1,17 +1,16 @@
 import React from "react";
-import WithLayout from "../src/WithLayout";
-import {MinimalSecured} from "../src/layouts";
+import {Minimal, WithLayout} from "../src/layouts";
 import Secured from '../src/views/Secured'
 
 const SecuredPage = () => {
 
-    return (
-        <WithLayout
-            isSecured={true}
-            component={Secured}
-            layout={MinimalSecured}
-        />
-    )
+  return (
+      <WithLayout
+          requireSession={true}
+          component={Secured}
+          layout={Minimal}
+      />
+  )
 }
 
 export default SecuredPage
