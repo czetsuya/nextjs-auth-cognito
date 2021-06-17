@@ -17,7 +17,7 @@ export default class MyDocument extends Document {
             <meta name="theme-color" content="#ffffff"/>
             <meta
                 name="description"
-                content="A modern design system for your new landing and web pages."
+                content="NextJS integration with Amazon Cognito."
             />
             <meta
                 name="robots"
@@ -27,17 +27,17 @@ export default class MyDocument extends Document {
             <meta property="og:type" content="website"/>
             <meta
                 property="og:image"
-                content="https://thefront.maccarianagency.com/assets/social.png"
+                content="https://4.bp.blogspot.com/-mjqhWWOAQ4k/YHGCZ8vh16I/AAAAAAAAMk4/ciGAb0cebQkuXMS_2y_r_BIa20aaXgoYgCK4BGAYYCw/s1600/Artboard%2B1.png"
             />
             <meta
                 property="og:title"
-                content="Sparqr | UI Kit by Maccarian Agency."
+                content="NextJS Amazon Cognito Integration | Czetsuya Tech"
             />
             <meta
                 property="og:description"
-                content="A modern design system for your new landing and web pages."
+                content="NextJS integration with Amazon Cognito."
             />
-            <meta property="og:url" content="https://thefront.maccarianagency.com/"/>
+            <meta property="og:url" content="https://czetsuyatech.com/"/>
             <link
                 href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&display=swap"
                 rel="stylesheet"
