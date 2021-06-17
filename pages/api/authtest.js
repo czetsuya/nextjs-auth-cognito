@@ -8,12 +8,13 @@ export default async (req, res) => {
 
   const {Auth} = withSSRContext({req});
 
-  let data;
+  let token;
   let user;
   try {
     user = await Auth.currentAuthenticatedUser();
     logger.debug('user is authenticated ', user);
     logger.debug('accessToken ', user.signInUserSession.accessToken.jwtToken)
+    token = user.signInUserSession.accessToken.jwtToken;
     // fetch some data and assign it to the data variable
 
   } catch (err) {
@@ -22,7 +23,7 @@ export default async (req, res) => {
 
   res.statusCode = 200;
   res.json({
-    data: data ? data : null,
+    token: token ? token : null,
     username: user ? user.username : null
   })
 }
