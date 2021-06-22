@@ -24,7 +24,6 @@ const logger = new Logger('useSession');
  * @see https://medium.com/better-programming/build-a-react-app-with-authentication-using-aws-amplify-49db1dfdc290
  * @see https://medium.com/@georgemccreadie/introduction-to-using-aws-cognito-hosted-ui-with-amplify-js-4711cf4f925a
  */
-
 const useSession = () => {
   const [stage, setStage] = useState(0)
   const [isLoading, setLoading] = useState(false)
