@@ -45,3 +45,4 @@ After successfully signing in, the API can be access at: http://localhost:3000/a
 ## References
 
 - https://docs.amplify.aws/lib/auth/customui/q/platform/js
+- https://www.czetsuyatech.com/2021/06/nextjs-security-with-aws-cognito.html
