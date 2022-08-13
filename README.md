@@ -1,8 +1,8 @@
-*If you would like to support these tutorials, you can contribute to my [Patreon account](https://patreon.com/czetsuya)
-
 # NextJS Authentication with Amazon Cognito
 
 This project is built on top of NextJS and is integrated with Amazon Cognito to provide AuthComponent functionality such as signup, signin, and password reset.
+
+Blog: https://www.czetsuyatech.com/2022/01/nextjs-secure-application-with-aws-amplify-and-cognito.html
 
 ## Amazon Cognito
 
